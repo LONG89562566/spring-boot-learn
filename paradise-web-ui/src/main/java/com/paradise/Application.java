@@ -23,6 +23,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @MapperScan("com.paradise.mapper")
 @PropertySource("classpath:/config/jdbc.properties")
 public class Application {
+	
 	public static Logger logger = Logger.getLogger(Application.class);
 	
 	//DataSource配置
