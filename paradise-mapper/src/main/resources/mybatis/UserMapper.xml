@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.paradise.mapper.UserMapper">
+
+	<resultMap id="UserResultMap" type="com.paradise.pojo.User" >
+ 		<id column="user_id" property="userID" jdbcType="INTEGER" />
+ 		<result column="password" property="password" jdbcType="VARCHAR"/>
+ 		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+ 	</resultMap>
+
+
+ 	<select id="getUserById" parameterType="int" resultMap="UserResultMap">
+ 		select * from user_info where user_id = #{id}
+ 	</select>
+ 	
+ 	<select id="isUserExist" parameterType="com.paradise.pojo.User" resultType="Integer">
+ 		
+ 		select count(user_id)
+ 		from user_info u
+ 		<where>
+ 			0 = 0
+ 			<if test="userID != 0">
+ 				and user_id=#{userID}
+ 			</if>
+ 			
+ 			<if test="userName != null">
+ 				and user_name=#{userName}
+ 			</if>
+ 			
+ 			<if test="password != null">
+ 				and password=#{password}
+ 			</if>
+ 		</where>
+ 		
+ 	</select>
+ 	
+ 	<insert id="insertUser" parameterType="com.paradise.pojo.User">
+ 	
+ 		insert into user_info (user_name,password) values (#{userName},#{password})
+ 	
+ 	</insert>
+ 	
+</mapper>
